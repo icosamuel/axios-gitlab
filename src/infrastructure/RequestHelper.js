@@ -25,7 +25,6 @@ function defaultRequest(
 
   params.resolveWithFullResponse = resolveWithFullResponse;
 
-  console.log(params);
   return params;
 }
 
