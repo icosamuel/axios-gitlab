@@ -1,5 +1,3 @@
-import Fs from 'fs';
-import Path from 'path';
 import { BaseService, RequestHelper } from '../infrastructure';
 import { validateEventOptions } from './Events';
 
@@ -86,26 +84,6 @@ class Projects extends BaseService {
     const pId = encodeURIComponent(projectId);
 
     return RequestHelper.post(this, `projects/${pId}/unstar`);
-  }
-
-  upload(projectId, filePath, { fileName = Path.basename(filePath) } = {}) {
-    const pId = encodeURIComponent(projectId);
-    const file = Fs.readFileSync(filePath);
-
-    return RequestHelper.post(
-      this,
-      `projects/${pId}/uploads`,
-      {
-        file: {
-          value: file,
-          options: {
-            filename: fileName,
-            contentType: 'application/octet-stream',
-          },
-        },
-      },
-      true,
-    );
   }
 }
 

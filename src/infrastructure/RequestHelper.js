@@ -1,62 +1,44 @@
 import Humps from 'humps';
 import LinkParser from 'parse-link-header';
-import QS from 'qs';
 import URLJoin from 'url-join';
-import StreamableRequest from 'request';
 
 function defaultRequest(
-  { url, useXMLHttpRequest },
+  { url },
   endpoint,
   {
     headers,
     body,
-    qs,
     formData,
+    method,
     resolveWithFullResponse = false,
   },
 ) {
   const params = {
     url: URLJoin(url, endpoint),
+    method,
     headers,
-    json: true,
+    responseType: 'json',
   };
 
-  if (body) params.body = Humps.decamelizeKeys(body);
-  if (qs) {
-    if (useXMLHttpRequest) {
-      // The xhr package doesn't have a way of passing in a qs object until v3
-      params.url = URLJoin(params.url, `?${QS.stringify(Humps.decamelizeKeys(qs))}`);
-    } else params.qs = Humps.decamelizeKeys(qs);
-  }
+  if (body) params.data = Humps.decamelizeKeys(body);
   if (formData) params.formData = formData;
 
   params.resolveWithFullResponse = resolveWithFullResponse;
 
+  console.log(params);
   return params;
-}
-
-function getStream(service, endpoint, options = {}) {
-  if (service.useXMLHttpRequest) {
-    throw new Error('Cannot use streaming functionality with XMLHttpRequest. Please instantiate without this option to use streaming');
-  }
-
-  const requestOptions = defaultRequest(service, endpoint, {
-    headers: service.headers,
-    qs: options,
-  });
-
-  return StreamableRequest.get(requestOptions);
 }
 
 async function getPaginated(service, endpoint, options = {}) {
   const { showPagination, maxPages, ...queryOptions } = options;
   const requestOptions = defaultRequest(service, endpoint, {
+    method: 'get',
     headers: service.headers,
-    qs: queryOptions,
+    body: queryOptions,
     resolveWithFullResponse: true,
   });
 
-  const response = await service.requester.get(requestOptions);
+  const response = await service.requester(requestOptions);
   const links = LinkParser(response.headers.link) || {};
   const page = response.headers['x-page'];
   const underMaxPageLimit = maxPages ? page < maxPages : true;
@@ -68,7 +50,7 @@ async function getPaginated(service, endpoint, options = {}) {
     more = await getPaginated(service, links.next.url.replace(service.url, ''), options);
   }
 
-  const data = [...response.body, ...more];
+  const data = [...response.data, ...more];
 
   if (!queryOptions.page && showPagination) {
     return {
@@ -87,38 +69,39 @@ async function getPaginated(service, endpoint, options = {}) {
 }
 
 class RequestHelper {
-  static async get(service, endpoint, options = {}, { stream = false } = {}) {
-    if (stream) return getStream(service, endpoint, options);
-
+  static async get(service, endpoint, options = {}) {
     return getPaginated(service, endpoint, options);
   }
 
   static post(service, endpoint, options = {}, form = false) {
     const body = form ? 'formData' : 'body';
     const requestOptions = defaultRequest(service, endpoint, {
+      method: 'post',
       headers: service.headers,
       [body]: options,
     });
 
-    return service.requester.post(requestOptions);
+    return service.requester(requestOptions);
   }
 
   static put(service, endpoint, options = {}) {
     const requestOptions = defaultRequest(service, endpoint, {
+      method: 'put',
       headers: service.headers,
       body: options,
     });
 
-    return service.requester.put(requestOptions);
+    return service.requester(requestOptions);
   }
 
   static delete(service, endpoint, options = {}) {
     const requestOptions = defaultRequest(service, endpoint, {
+      method: 'delete',
       headers: service.headers,
-      qs: options,
+      body: options,
     });
 
-    return service.requester.delete(requestOptions);
+    return service.requester(requestOptions);
   }
 }
 
