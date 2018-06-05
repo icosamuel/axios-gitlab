@@ -10,7 +10,6 @@ function defaultRequest(
     body,
     formData,
     method,
-    resolveWithFullResponse = false,
   },
 ) {
   const params = {
@@ -20,10 +19,8 @@ function defaultRequest(
     responseType: 'json',
   };
 
-  if (body) params.data = Humps.decamelizeKeys(body);
+  if (body) params.params = Humps.decamelizeKeys(body);
   if (formData) params.formData = formData;
-
-  params.resolveWithFullResponse = resolveWithFullResponse;
 
   return params;
 }
@@ -51,7 +48,7 @@ async function getPaginated(service, endpoint, options = {}) {
 
   const data = [...response.data, ...more];
 
-  if (!queryOptions.page && showPagination) {
+  if (showPagination) {
     return {
       data,
       pagination: {
@@ -60,6 +57,7 @@ async function getPaginated(service, endpoint, options = {}) {
         current: response.headers['x-page'],
         previous: response.headers['x-prev-page'],
         total: response.headers['x-total-pages'],
+        totalItems: response.headers['x-total'],
       },
     };
   }
