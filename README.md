@@ -2,8 +2,9 @@
 
 
 
-# node-gitlab
-
+# axios-gitlab 
+  
+  forked from [node-gitlab](https://github.com/jdalrymple/node-gitlab)
  🤖 [GitLab](https://github.com/gitlabhq/gitlabhq) API NodeJS library with full support of all the [Gitlab API](https://github.com/gitlabhq/gitlabhq/tree/master/doc/api) services.
 
 ## Table of Contents
@@ -365,6 +366,7 @@ pagination: {
   perPage: 3,
   previous: 1,
   total: 3,
+  totalItems: 8,
 }
 ```
 
