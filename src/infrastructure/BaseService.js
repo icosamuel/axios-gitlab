@@ -1,15 +1,13 @@
 import URLJoin from 'url-join';
-import Request from 'request-promise';
-import XMLHttpRequester from './XMLHttpRequester';
+import Axios from 'axios';
 
 class BaseModel {
   constructor({
-    url = 'https://gitlab.com', token, oauthToken, useXMLHttpRequest = false,
+    url = 'https://gitlab.com', token, oauthToken,
   } = {}) {
     this.url = URLJoin(url, 'api', 'v4');
     this.headers = {};
-    this.requester = useXMLHttpRequest ? XMLHttpRequester : Request;
-    this.useXMLHttpRequest = useXMLHttpRequest;
+    this.requester = Axios;
 
     if (oauthToken) {
       this.headers.authorization = `Bearer ${oauthToken}`;
