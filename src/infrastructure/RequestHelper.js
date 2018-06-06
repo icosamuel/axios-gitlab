@@ -45,9 +45,9 @@ async function getPaginated(service, endpoint, options = {}) {
   // AND their is a next page, paginate
   if (!queryOptions.page && underMaxPageLimit && links.next) {
     more = await getPaginated(service, links.next.url.replace(service.url, ''), options);
-    data = [...response.body, ...more];
+    data = [...response.data, ...more];
   } else {
-    data = response.body;
+    data = response.data;
   }
 
   if (queryOptions.page && showPagination) {
