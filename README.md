@@ -4,8 +4,8 @@
 
 # axios-gitlab 
   
-  This project attempts to make node-gitlab browser friendly by removing some dependencies unavailable on the client.
-  Forked from [node-gitlab](https://github.com/jdalrymple/node-gitlab) and migrated to [Axios](https://github.com/axios/axios)
+  This project attempts to make node-gitlab browser friendly by removing some dependencies unavailable on the client.  
+  Forked from [node-gitlab](https://github.com/jdalrymple/node-gitlab) and migrated to [Axios](https://github.com/axios/axios)  
  🤖 [GitLab](https://github.com/gitlabhq/gitlabhq) API NodeJS library with full support of all the [Gitlab API](https://github.com/gitlabhq/gitlabhq/tree/master/doc/api) services.
 
 ## Table of Contents
