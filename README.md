@@ -31,7 +31,7 @@
 
 ```bash
 # Install from npm
-npm install gitlab
+npm install axios-gitlab
 ```
 
 ## Usage
