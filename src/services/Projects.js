@@ -44,6 +44,12 @@ class Projects extends BaseService {
     return RequestHelper.get(this, `projects/${pId}/languages`);
   }
 
+  mirrorPull(projectId) {
+    const pId = encodeURIComponent(projectId);
+
+    return RequestHelper.post(this, `projects/${pId}/mirror/pull`);
+  }
+
   remove(projectId) {
     const pId = encodeURIComponent(projectId);
 
@@ -90,6 +96,12 @@ class Projects extends BaseService {
     const pId = encodeURIComponent(projectId);
 
     return RequestHelper.post(this, `projects/${pId}/unstar`);
+  }
+
+  updatePushRule(projectId, options) {
+    const pId = encodeURIComponent(projectId);
+
+    return RequestHelper.put(this, `projects/${pId}/push_rule`, options);
   }
 }
 

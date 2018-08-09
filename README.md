@@ -1,4 +1,10 @@
- [![dependencies Status](https://david-dm.org/jdalrymple/node-gitlab/status.svg)](https://github.com/icosamuel/axios-gitlab) [![devDependencies Status](https://david-dm.org/jdalrymple/node-gitlab/dev-status.svg)](https://david-dm.org/jdalrymple/node-gitlab?type=dev) [![Greenkeeper badge](https://badges.greenkeeper.io/jdalrymple/node-gitlab.svg)](https://greenkeeper.io/) [![Code Climate](https://codeclimate.com/github/jdalrymple/node-gitlab/badges/gpa.svg)](https://codeclimate.com/github/jdalrymple/node-gitlab) [![Build Status](https://travis-ci.org/jdalrymple/node-gitlab.svg?branch=master)](https://travis-ci.org/jdalrymple/node-gitlab) [![codecov](https://codecov.io/gh/jdalrymple/node-gitlab/branch/master/graph/badge.svg)](https://codecov.io/gh/jdalrymple/node-gitlab) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+ [![dependencies Status](https://david-dm.org/jdalrymple/node-gitlab/status.svg)](https://github.com/icosamuel/axios-gitlab)
+ [![devDependencies Status](https://david-dm.org/jdalrymple/node-gitlab/dev-status.svg)](https://david-dm.org/jdalrymple/node-gitlab?type=dev)
+ [![Greenkeeper badge](https://badges.greenkeeper.io/jdalrymple/node-gitlab.svg)](https://greenkeeper.io/)
+ [![Code Climate](https://codeclimate.com/github/jdalrymple/node-gitlab/badges/gpa.svg)](https://codeclimate.com/github/jdalrymple/node-gitlab)
+ [![Build Status](https://travis-ci.org/jdalrymple/node-gitlab.svg?branch=master)](https://travis-ci.org/jdalrymple/node-gitlab)
+ [![codecov](https://codecov.io/gh/jdalrymple/node-gitlab/branch/master/graph/badge.svg)](https://codecov.io/gh/jdalrymple/node-gitlab)
+ [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
 
@@ -18,7 +24,7 @@
         - [Bundle Imports](#bundle-imports)
     - [Examples](#examples)
     - [Pagination](#pagination)
-- [Migrating from node-gitlab](#migrating-from-node-gitlab)
+- [Migrating from node-gitlab](#migrating-from-node-gitlabnode-gitlab)
 - [Docs](#docs)
 - [Development](#development)
 - [Testing](#testing)
@@ -471,6 +477,15 @@ This started off as a fork from [node-gitlab](https://github.com/node-gitlab/nod
 - [Sharma-Rajat](https://github.com/Sharma-Rajat)
 - [Joseph Petersen](https://github.com/casz)
 - [Igor Katsuba](https://github.com/Defenderbass)
+- [Michael Townsend](https://github.com/Continuities)
+- [bodtx](https://github.com/bodtx)
+- [Artem](https://github.com/arthot)
+- [Munif Tanjim](https://github.com/MunifTanjim)
+- [Max Wittig](https://github.com/max-wittig)
+- [Quentin Dreyer](https://github.com/qkdreyer)
+- [Norm MacLennan](https://github.com/maclennann)
+- [jnovick](https://github.com/jnovick)
+- [Fabian Aussems](https://github.com/mozinator)
 
 ## License
 

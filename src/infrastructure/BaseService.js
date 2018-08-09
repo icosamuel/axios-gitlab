@@ -3,9 +3,12 @@ import Axios from 'axios';
 
 class BaseModel {
   constructor({
-    url = 'https://gitlab.com', token, oauthToken,
+    token,
+    oauthToken,
+    url = 'https://gitlab.com',
+    version = 'v4',
   } = {}) {
-    this.url = URLJoin(url, 'api', 'v4');
+    this.url = URLJoin(url, 'api', version);
     this.headers = {};
     this.requester = Axios;
 

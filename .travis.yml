@@ -1,49 +1,45 @@
 language: node_js
 
 stages:
-  - prepare cache
-  - lint
-  - build
+  - lint and build
   - test
+  - release
 
 cache:
   directories:
-  - node_modules # NPM packages
+    - node_modules # NPM packages
+    - ~/.npm
+
+notifications:
+  email: false
 
 jobs:
   include:
-    - stage: prepare cache
-      node_js: node
-      script: true
+    - stage: lint and build
+      node_js: 10.0.0
+      script:
+        - npm run lint
+        - npm run build
 
-    - stage: lint
-      node_js: node
-      script: npm run lint
-
-    - stage: build
-      node_js: node
-      script: npm run build
-
-    - &test
-      stage: test
-      node_js: 8
+    - stage: test
+      node_js: 10.0.0
       before_script:
         ## Spin up container
         - cd test/docker/
         - docker-compose -f docker-compose.test.yml up -d
 
-        ## Sleep before performing commands on container
-        - sleep 240
+        ## Test for liveness
+        # - docker exec -it gitlab bash -lc 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost/-/readiness)" != "200" ]]; do sleep 5; done'
+        - sleep 240 
 
         - export PERSONAL_ACCESS_TOKEN=$(docker exec -it gitlab bash -lc 'printf "%q" "${PERSONAL_ACCESS_TOKEN}"')
         - export GITLAB_URL=$(docker exec -it gitlab bash -lc 'printf "%q" "${GITLAB_URL}"')
-      script: npm run test
-
-    - <<: *test
-      node_js: lts/*
-
-    - <<: *test
-      node_js: 9
-
-    - <<: *test
-      node_js: node
+        - echo $GITLAB_URL
+        - echo $PERSONAL_ACCESS_TOKEN
+      script:
+        - npm run test
+        
+    - stage: release
+      node_js: 10.0.0
+      script:
+        - npm run semantic-release
