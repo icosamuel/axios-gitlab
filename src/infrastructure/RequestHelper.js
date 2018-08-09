@@ -25,21 +25,6 @@ function defaultRequest(
   return params;
 }
 
-function getStream(service, endpoint, options = {}) {
-  if (service.useXMLHttpRequest) {
-    throw new Error(
-      'Cannot use streaming functionality with XMLHttpRequest. Please instantiate without this option to use streaming',
-    );
-  }
-
-  const requestOptions = defaultRequest(service, endpoint, {
-    headers: service.headers,
-    qs: options,
-  });
-
-  return StreamableRequest.get(requestOptions);
-}
-
 async function wait(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
