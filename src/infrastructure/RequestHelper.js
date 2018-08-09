@@ -39,7 +39,7 @@ async function getPaginated(service, endpoint, options = {}, sleepOnRateLimit = 
   });
 
   try {
-    const response = await service.requester.get(requestOptions);
+    const response = await service.requester(requestOptions);
     const links = LinkParser(response.headers.link) || {};
     const page = response.headers['x-page'];
     const underMaxPageLimit = maxPages ? page < maxPages : true;
@@ -50,9 +50,9 @@ async function getPaginated(service, endpoint, options = {}, sleepOnRateLimit = 
     // AND their is a next page, paginate
     if (!queryOptions.page && underMaxPageLimit && links.next) {
       more = await getPaginated(service, links.next.url.replace(service.url, ''), options);
-      data = [...response.body, ...more];
+      data = [...response.data, ...more];
     } else {
-      data = response.body;
+      data = response.data;
     }
 
     if (queryOptions.page && showPagination) {
