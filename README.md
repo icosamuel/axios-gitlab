@@ -1,13 +1,3 @@
- [![dependencies Status](https://david-dm.org/jdalrymple/node-gitlab/status.svg)](https://github.com/icosamuel/axios-gitlab)
- [![devDependencies Status](https://david-dm.org/jdalrymple/node-gitlab/dev-status.svg)](https://david-dm.org/jdalrymple/node-gitlab?type=dev)
- [![Greenkeeper badge](https://badges.greenkeeper.io/jdalrymple/node-gitlab.svg)](https://greenkeeper.io/)
- [![Code Climate](https://codeclimate.com/github/jdalrymple/node-gitlab/badges/gpa.svg)](https://codeclimate.com/github/jdalrymple/node-gitlab)
- [![Build Status](https://travis-ci.org/jdalrymple/node-gitlab.svg?branch=master)](https://travis-ci.org/jdalrymple/node-gitlab)
- [![codecov](https://codecov.io/gh/jdalrymple/node-gitlab/branch/master/graph/badge.svg)](https://codecov.io/gh/jdalrymple/node-gitlab)
- [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-
-
 # axios-gitlab 
   
   This project attempts to make node-gitlab browser friendly by removing some dependencies unavailable on the client.  
